@@ -1,11 +1,16 @@
-import type { NextPage } from 'next'
+import type {NextPage} from 'next'
 import {Button} from "antd";
 import {useRouter} from "next/router";
+import {useEffect} from "react";
 
 const Home: NextPage = () => {
     const router = useRouter()
-    router.push('/article')
-    return(
+    useEffect(() => {
+        router.push('/article')
+    }, [])
+
+
+    return (
         <>
 
         </>

@@ -22,9 +22,6 @@ export const AppHeader: React.FC = (props:any) => {
                             }
                     </Card>
                 </AppHeaderCenterWrapper>
-
-
-
         </AppHeaderWrapper>
     );
 }
