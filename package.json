@@ -26,6 +26,7 @@
     "@types/react": "17.0.39",
     "@types/redux-immutable": "^4.0.2",
     "@types/styled-components": "^5.1.24",
+    "babel-plugin-styled-components": "^2.0.6",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "styled-components": "^5.3.3",
