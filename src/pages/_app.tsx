@@ -9,6 +9,9 @@ import {useRouter} from "next/router";
 
 import nProgress from "nprogress"
 import "nprogress/nprogress.css"
+import AppLoading from "@/components/AppLoading";
+import {BackTop, Tooltip} from "antd";
+import {AppFooter} from "@/components/AppFooter";
 const App = memo( ({Component, pageProps}: AppProps)=> {
 
     const router = useRouter()
@@ -25,15 +28,20 @@ const App = memo( ({Component, pageProps}: AppProps)=> {
             Events.off("routeChangeStart", () => { })
             Events.off("routeChangeComplete", () => { })
         }
-    },[])
+    },[router])
 
     return (
         <>
             <Provider store={store}>
-                <AppHeader />
-                <div className='container-wrap mt-20 pb-20'>
-                    <Component {...pageProps} />
+                    <AppHeader />
+                <div className={'container-width'}>
+                    <div className='container-wrap pt-20 pb-20'>
+                        <Component {...pageProps} />
+                    </div>
+                    <AppLoading />
                 </div>
+                <AppFooter />
+                <Tooltip title="返回顶部"><BackTop /></Tooltip>
             </Provider>
         </>
     )

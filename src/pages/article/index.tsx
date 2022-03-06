@@ -1,9 +1,15 @@
 import React from 'react';
+import {ArticleProfile} from "@/components/ArticleProfile";
+import {ArticleWrapper} from "@/styles/article";
 
  const Article: React.FC = () => {
     return (
         <>
-            <h1>article</h1>
+            <ArticleWrapper>
+                <div className={'article-left'}>
+                    <ArticleProfile/>
+                </div>
+            </ArticleWrapper>
         </>
     );
 }

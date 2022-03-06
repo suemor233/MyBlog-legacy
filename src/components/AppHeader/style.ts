@@ -21,7 +21,6 @@ export const AppHeaderCenterWrapper = styled.div`
   .ant-card-body{
     padding: 0;
     position: relative;
-    margin-left: 10%;
   }
   .card {
     width: 100%;

@@ -11,6 +11,7 @@ export const AppHeader: React.FC = (props:any) => {
 
                 <AppHeaderCenterWrapper>
                     <Card bordered={true} hoverable={true} className={'card'}>
+                        <div className={'container-wrap'}>
                             {
                                 routes.map((item, index) => {
                                     return (
@@ -20,6 +21,8 @@ export const AppHeader: React.FC = (props:any) => {
                                     )
                                 })
                             }
+                        </div>
+
                     </Card>
                 </AppHeaderCenterWrapper>
         </AppHeaderWrapper>
