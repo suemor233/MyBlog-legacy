@@ -7,7 +7,10 @@ import {ArticleWrapper} from "@/styles/article";
         <>
             <ArticleWrapper>
                 <div className={'article-left'}>
-                    <ArticleProfile/>
+                    <div style={{width:'30%'}}>
+                        <ArticleProfile/>
+
+                    </div>
                 </div>
             </ArticleWrapper>
         </>
