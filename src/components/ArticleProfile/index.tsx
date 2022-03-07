@@ -1,11 +1,19 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {Card} from "antd";
 import {ArticleProfileWrapper} from "@/components/ArticleProfile/style";
 import { Image } from 'antd';
 import Icon, {GithubOutlined, TwitterOutlined} from "@ant-design/icons";
-export const ArticleProfile: React.FC = () => {
 
+interface IProps {
+    username:string,
+    github:string,
+    email:string,
+    twitter:string,
+    introduce:string,
+    avatar:string
+}
 
+export const ArticleProfile: React.FC<IProps> = ({username,github,email,twitter,introduce,avatar}):ReactElement => {
     return (
         <>
             <ArticleProfileWrapper>
@@ -14,23 +22,23 @@ export const ArticleProfile: React.FC = () => {
                         <div style={{display:'flex',justifyContent:'center'}}>
                             <Image
                                 alt='个人头像'
-                                src="https://suemor.oss-cn-beijing.aliyuncs.com/img/89030875.jpeg"
+                                src={avatar}
                                 width={128}
                                 height={128}
                                 preview={false}
                             />
                         </div>
 
-                        <p>Suemor</p>
-                        <span >所谓自由就是可以说二加二等于四的自由</span>
+                        <p>{username}</p>
+                        <span >{introduce}</span>
                         <div className={'iconView'}>
-                            <a href="https://github.com/Elmge">
+                            <a href={github}>
                                 <GithubOutlined style={{fontSize:'30px'}}/>
                             </a>
-                            <a href="https://twitter.com/Suemor233" style={{color:"#03A4ED"}}>
+                            <a href={twitter} style={{color:"#03A4ED"}}>
                                 <TwitterOutlined style={{fontSize:'30px'}}/>
                             </a>
-                            <a href="mailto:suemor233@outlook.com" >
+                            <a href={'mailto:'+email} >
                               <Image src={'https://suemor.oss-cn-beijing.aliyuncs.com/img/邮箱 (1).png'}preview={false} width={'30px'} />
                             </a>
                         </div>
