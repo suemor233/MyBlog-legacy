@@ -4,7 +4,7 @@ export const ArticleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #F7F7F7;
-  height: 100vh;
+  height: 100%;
 
  
   @keyframes transformAnimateLeft {
@@ -25,7 +25,7 @@ export const ArticleWrapper = styled.div`
   }
   
   .article-right {
-    flex: 1;
+    flex: 5;
     animation: transformAnimateRight .8s;
   }
 `

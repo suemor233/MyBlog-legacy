@@ -1,18 +1,25 @@
 import React, {memo, useEffect} from 'react';
 import {ArticleProfile} from "@/components/ArticleProfile";
 import {ArticleWrapper} from "@/styles/article";
-import {GetStaticProps, InferGetStaticPropsType, NextPage} from "next";
+import {GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage} from "next";
 import {fetchUserProfile} from "@/service/modules/user";
 import {CustomAxiosResponse} from '@/common/interface/axios'
+import {fetchArticleList} from "@/service/modules/article";
+import {Empty} from "antd";
+import {useRouter} from "next/router";
+import {ArticleCard} from "@/components/ArticleCard";
+import {article} from "@/common/interface/article";
 
-
-
- const Article: NextPage = memo(function MyArticle( {profile}: InferGetStaticPropsType<typeof getStaticProps>) {
+ const Article: NextPage = memo(( {profile,articleList}: InferGetServerSidePropsType<typeof getServerSideProps>)=> {
+     const router = useRouter()
+     const routerJump = (id: string) => {
+         router.push(`/article/detail/${id}`)
+     }
     return (
         <>
             <ArticleWrapper>
                 <div className={'article-left'}>
-                    <div style={{width:'30%'}}>
+                    <div >
                         <ArticleProfile
                             username={profile.userName}
                             introduce={profile.introduce}
@@ -23,23 +30,56 @@ import {CustomAxiosResponse} from '@/common/interface/axios'
                         />
                     </div>
                 </div>
+
+                <div className={'article-right'}>
+                    {
+                        articleList && articleList.length
+                            ?
+                            <div className="article-left">
+                                {
+                                    articleList && articleList.map((item: article) => {
+                                        return (
+                                            <div key={item.id} onClick={() => routerJump(item.id)}>
+                                                <ArticleCard
+                                                    id={item.id}
+                                                    title={item.title}
+                                                    content={item.content}
+                                                    cover={item.cover}
+                                                    tags={item.tags}
+                                                    createAt={item.createAt}
+                                                    updateAt={item.updateAt}
+                                                    category={item.category} />
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            :
+                            <Empty
+                                style={{ flex: 3, height: '100vh', lineHeight: '100vh', color: '#888' }}
+                                description="抱歉 这里现在什么内容都没有的喵～"/>
+                    }
+
+                </div>
             </ArticleWrapper>
         </>
     );
 })
 
-export const getStaticProps: GetStaticProps = async () => {
-    const res = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
+export const getServerSideProps: GetServerSideProps = async () => {
+    const profile = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
+    const article = await fetchArticleList() as CustomAxiosResponse
     return {
         props: {
             profile:{
-                userName:res.data.userName,
-                introduce:res.data.introduce,
-                githubUrl:res.data.githubUrl,
-                emailUrl:res.data.emailUrl,
-                twitterUrl:res.data.twitterUrl,
-                avatar:res.data.avatar
-            }
+                userName:profile.data.userName,
+                introduce:profile.data.introduce,
+                githubUrl:profile.data.githubUrl,
+                emailUrl:profile.data.emailUrl,
+                twitterUrl:profile.data.twitterUrl,
+                avatar:profile.data.avatar
+            },
+            articleList:article.data
         },
     };
 };

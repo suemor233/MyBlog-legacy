@@ -8,7 +8,7 @@ const routes = [
     path: '/article',
   },
   {
-    name: '列表',
+    name: '归档',
     path: '/list',
   },
   {

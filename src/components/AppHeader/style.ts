@@ -30,7 +30,7 @@ export const AppHeaderCenterWrapper = styled.div`
 
     .nav-item {
       cursor: pointer;
-      line-height: 60px;
+      line-height: 50px;
       display: inline-block;
       text-align: center;
       padding: 0 10px;

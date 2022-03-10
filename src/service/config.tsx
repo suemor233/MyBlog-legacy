@@ -11,7 +11,6 @@ const service = axios.create({
 })
 
 service.interceptors.request.use((config) => {
-
   store.dispatch(showLoadingAction())
   return config;
 })
