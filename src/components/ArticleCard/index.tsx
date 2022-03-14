@@ -18,7 +18,6 @@ export const ArticleCard: React.FC<article> = memo(
             content
         }
     ): ReactElement => {
-
         return (
             <>
                 <ArticleCardWrapper>
