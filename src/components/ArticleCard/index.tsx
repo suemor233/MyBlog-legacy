@@ -30,8 +30,6 @@ export const ArticleCard: React.FC<article> = memo(
                             <p>
                                 <strong><FileTextOutlined />&nbsp;&nbsp;字数：{content.length}个字符</strong>
                             </p>
-
-
                             <p className='card-item-tags'>
                                 <strong><TagOutlined />&nbsp;&nbsp;标签：</strong>
                                 {
