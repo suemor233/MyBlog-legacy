@@ -50,7 +50,6 @@ export const ArticleCard: React.FC<article> = memo(
                             <span></span>
                             <span></span>
                         </div>
-
                     </Card>
 
 
