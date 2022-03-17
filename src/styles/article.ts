@@ -4,7 +4,7 @@ export const ArticleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #F7F7F7;
-  min-height: 1000px;
+  height: 100%;
   @keyframes transformAnimateLeft {
     0%{ transform: translateX(-100%) }
     100%{ transform: translateX(0) }
@@ -29,7 +29,7 @@ export const ArticleWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     animation: transformAnimateLeft .8s;
-
+ 
   }
 
   .article-right {

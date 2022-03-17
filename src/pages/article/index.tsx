@@ -1,20 +1,37 @@
-import React, {memo, useEffect} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {ArticleProfile} from "@/components/ArticleProfile";
 import {ArticleWrapper} from "@/styles/article";
 import {GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType, NextPage} from "next";
 import {fetchUserProfile} from "@/service/modules/user";
 import {CustomAxiosResponse} from '@/common/interface/axios'
 import {fetchArticleList} from "@/service/modules/article";
-import {Empty} from "antd";
+import {Empty, Pagination} from "antd";
 import {useRouter} from "next/router";
 import {ArticleCard} from "@/components/ArticleCard";
-import {IArticleList} from "@/common/interface/article";
+import {IArticle, IArticleList} from "@/common/interface/article";
 
  const Article: NextPage = memo(( {profile,articleList}: InferGetServerSidePropsType<typeof getServerSideProps>)=> {
      const router = useRouter()
      const routerJump = (id: string) => {
          router.push(`/article/detail/${id}`)
      }
+
+     const [pageNum, setPageNum] = useState(1)
+     const [articleTotal, setArticleTotal] = useState(articleList.total)
+     const [article, setArticle] = useState(articleList.article)
+
+     // 重置文章数据
+     const resetArticleList = useCallback(async (page: number) => {
+         const articleData = await fetchArticleList({pageNum: page, pageSize: 4}) as CustomAxiosResponse
+
+         setArticle(articleData.data.article)
+         setArticleTotal(articleData.data.total)
+     }, [])
+
+     const pageChange = useCallback(async (page: number) => {
+         setPageNum(page)
+         resetArticleList(page)
+     }, [resetArticleList])
     return (
         <>
             <ArticleWrapper>
@@ -33,11 +50,11 @@ import {IArticleList} from "@/common/interface/article";
 
                 <div className={'article-right'}>
                     {
-                        articleList && articleList.length
+                        article && article.length
                             ?
                             <div className="article-left">
                                 {
-                                    articleList && articleList.map((item: IArticleList) => {
+                                    article && article.map((item: IArticleList) => {
                                         return (
                                             <div key={item.id} onClick={() => routerJump(item.id)}>
                                                 <ArticleCard
@@ -53,6 +70,12 @@ import {IArticleList} from "@/common/interface/article";
                                         )
                                     })
                                 }
+                                <Pagination
+                                    onChange={pageChange}
+                                    current={pageNum}
+                                    pageSize={4}
+                                    showTotal={(articleTotal) => `共 ${articleTotal} 篇`}
+                                    total={articleTotal} />
                             </div>
                             :
                             <Empty
@@ -68,8 +91,8 @@ import {IArticleList} from "@/common/interface/article";
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const profile = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
-    const article = await fetchArticleList({pageNum: 1, pageSize: 10}) as CustomAxiosResponse
-    console.log(article.data)
+    const article = await fetchArticleList({pageNum: 1, pageSize: 4}) as CustomAxiosResponse
+
     return {
         props: {
             profile:{
@@ -80,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
                 twitterUrl:profile.data.twitterUrl,
                 avatar:profile.data.avatar
             },
-            articleList:article.data.article
+            articleList:article.data
         },
     };
 };

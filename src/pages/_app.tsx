@@ -34,13 +34,14 @@ const App = memo( ({Component, pageProps}: AppProps)=> {
         <>
             <div className={'container-width'}>
                 <Provider store={store}>
-                    <AppHeader />
-                        <div className='container-wrap pt-20 pb-20'>
+                        <AppHeader />
+                        <div  className='container-wrap pt-20 pb-20'>
                             <Component {...pageProps} />
                         </div>
-                    <AppFooter />
-                    <Tooltip title="返回顶部"><BackTop /></Tooltip>
-                    <AppLoading />
+                        <AppFooter />
+                        <Tooltip title="返回顶部"><BackTop /></Tooltip>
+                        <AppLoading />
+
                 </Provider>
 
             </div>
