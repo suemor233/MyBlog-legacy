@@ -1,4 +1,9 @@
-export interface article {
+export interface IArticle {
+    articleList:{article:IArticleList[],total:number}
+}
+
+
+export interface IArticleList {
     id:string,
     title:string,
     content:string,
@@ -8,3 +13,5 @@ export interface article {
     createAt:string,
     updateAt:string
 }
+
+

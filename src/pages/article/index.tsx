@@ -8,7 +8,7 @@ import {fetchArticleList} from "@/service/modules/article";
 import {Empty} from "antd";
 import {useRouter} from "next/router";
 import {ArticleCard} from "@/components/ArticleCard";
-import {article} from "@/common/interface/article";
+import {IArticleList} from "@/common/interface/article";
 
  const Article: NextPage = memo(( {profile,articleList}: InferGetServerSidePropsType<typeof getServerSideProps>)=> {
      const router = useRouter()
@@ -37,7 +37,7 @@ import {article} from "@/common/interface/article";
                             ?
                             <div className="article-left">
                                 {
-                                    articleList && articleList.map((item: article) => {
+                                    articleList && articleList.map((item: IArticleList) => {
                                         return (
                                             <div key={item.id} onClick={() => routerJump(item.id)}>
                                                 <ArticleCard
@@ -68,7 +68,8 @@ import {article} from "@/common/interface/article";
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const profile = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
-    const article = await fetchArticleList() as CustomAxiosResponse
+    const article = await fetchArticleList({pageNum: 1, pageSize: 10}) as CustomAxiosResponse
+    console.log(article.data)
     return {
         props: {
             profile:{
@@ -79,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
                 twitterUrl:profile.data.twitterUrl,
                 avatar:profile.data.avatar
             },
-            articleList:article.data
+            articleList:article.data.article
         },
     };
 };

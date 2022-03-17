@@ -9,7 +9,7 @@ const routes = [
   },
   {
     name: '归档',
-    path: '/list',
+    path: '/archives',
   },
   {
     name: '关于',
