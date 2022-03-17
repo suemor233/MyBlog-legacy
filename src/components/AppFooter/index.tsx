@@ -5,7 +5,7 @@ export const AppFooter: React.FC = () => {
     return (
         <>
             <AppFooterWrapper >
-                <span>本网站由react+node驱动&nbsp;&copy;搬运文章请注明出处;</span>
+                <span>本博客由react+node驱动&nbsp;&copy;搬运文章请注明出处;</span>
             </AppFooterWrapper>
         </>
     );

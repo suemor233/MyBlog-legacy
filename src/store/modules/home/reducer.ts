@@ -6,8 +6,16 @@ import { ActionTypes } from "./constants"
 const initialState = Map({
   requestLoading: false
 })
+
+interface IAction {
+    type:string
+}
+
+
+
+
 // home reducer
-export function reducer(state = initialState, action: any) {
+export function reducer(state = initialState, action: IAction) {
   switch (action.type) {
       // loading未开启的时候才去显示loading
       case ActionTypes.SHOW_LOADING:
