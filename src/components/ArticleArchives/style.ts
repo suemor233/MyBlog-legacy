@@ -41,4 +41,10 @@ export const ArticleArchivesWrapper = styled.div`
   .article-columns span {
     font-size: 1rem;
   }
+  
+  .ant-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 `

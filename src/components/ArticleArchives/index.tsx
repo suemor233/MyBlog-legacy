@@ -4,11 +4,13 @@ import {ArticleArchivesWrapper} from "@/components/ArticleArchives/style";
 import {IArticle, IArticleList} from "@/common/interface/article";
 import {ArticleCard} from "@/components/ArticleCard";
 import {useRouter} from "next/router";
-import {formatTime} from "@/utils/format";
+import {formatMonth, formatTime, formatYear} from "@/utils/format";
 import {fetchArticleList} from "@/service/modules/article";
+import Article from "@/pages/article";
 
 
- const ArticleArchives: React.FC<IArticle> = memo(
+
+const ArticleArchives: React.FC<IArticle> = memo(
     (
         {
             articleList
@@ -24,7 +26,6 @@ import {fetchArticleList} from "@/service/modules/article";
         // 重置文章数据
         const resetArticleList = useCallback(async (page: number,) => {
             const articleData: any = await fetchArticleList({pageNum: page, pageSize: 10})
-            console.log(articleData)
             setArticle(articleData.data.article)
             setArticleTotal(articleData.data.total)
         }, [])
@@ -33,6 +34,7 @@ import {fetchArticleList} from "@/service/modules/article";
             setPageNum(page)
             resetArticleList(page)
         }, [resetArticleList])
+
     return (
         <>
             <ArticleArchivesWrapper>
@@ -44,11 +46,20 @@ import {fetchArticleList} from "@/service/modules/article";
                                 <p className={'article-length'}>共计 {articleTotal} 篇文章</p>
                                 {
                                     article && article.map((item:IArticleList) =>{
+
                                        return (
-                                            <div className={'article-columns'} key={item.id}  onClick={() => routerJump(item.id)}>
-                                                <span>{item.title}</span>
-                                                <span>{formatTime(item.createAt)}</span>
-                                            </div>
+                                           <div key={item.id}>
+                                               {
+                                                   <ArticleTime time={formatYear(item.createAt)}/>
+                                               }
+
+                                               <div className={'article-columns'} key={item.id}  onClick={() => routerJump(item.id)}>
+                                                   <span>{item.title}</span>
+                                                   <span>{formatMonth(item.createAt)}</span>
+                                               </div>
+
+                                           </div>
+
                                         )
                                     })
                                 }
@@ -56,8 +67,9 @@ import {fetchArticleList} from "@/service/modules/article";
                                     onChange={pageChange}
                                     current={pageNum}
                                     pageSize={10}
-                                    showTotal={(articleTotal) => `共 ${articleTotal} 篇`}
+
                                     total={articleTotal} />
+
                             </div>
                             :
                             <Empty
@@ -71,4 +83,33 @@ import {fetchArticleList} from "@/service/modules/article";
         </>
     );
 })
+
+let timeTemp = ''
+
+const ArticleTime:React.FC<{time:string}> = ({time}) => {
+
+    const [isChange, setIsChange] = useState(false);
+    const isYear = ()=>{
+        if (time === timeTemp){
+            setIsChange(false)
+        }else {
+            timeTemp = time
+            setIsChange(true)
+        }
+    }
+    useEffect(() => {
+        console.log(time)
+        isYear()
+    }, []);
+
+    return (
+        <>
+                 {
+                     isChange ? <span style={{fontSize:'20px',}}>{time}</span> : undefined
+                 }
+        </>
+    );
+}
+
+
 export default ArticleArchives
