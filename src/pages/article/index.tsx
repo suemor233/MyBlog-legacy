@@ -97,7 +97,6 @@ import {ArticleListLeft} from "@/components/ArticleListLeft";
 export const getServerSideProps: GetServerSideProps = async () => {
     const profile = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
     const article = await fetchArticleList({pageNum: 1, pageSize: 4}) as CustomAxiosResponse
-
     return {
         props: {
             profile:{
