@@ -9,7 +9,6 @@ import {fetchArticleList} from "@/service/modules/article";
 import Article from "@/pages/article";
 
 
-
 const ArticleArchives: React.FC<IArticle> = memo(
     (
         {
@@ -35,64 +34,65 @@ const ArticleArchives: React.FC<IArticle> = memo(
             resetArticleList(page)
         }, [resetArticleList])
 
-    return (
-        <>
-            <ArticleArchivesWrapper>
-                <Card style={{ width: '100%' }} bordered={true} hoverable={true}>
-                    {
-                        article && article.length
-                            ?
-                            <div>
-                                <p className={'article-length'}>共计 {articleTotal} 篇文章</p>
-                                {
-                                    article && article.map((item:IArticleList) =>{
+        return (
+            <>
+                <ArticleArchivesWrapper>
+                    <Card style={{width: '100%'}} bordered={true} hoverable={true}>
+                        {
+                            article && article.length
+                                ?
+                                <div>
+                                    <p className={'article-length'}>共计 {articleTotal} 篇文章</p>
+                                    {
+                                        article && article.map((item: IArticleList) => {
 
-                                       return (
-                                           <div key={item.id}>
-                                               {
-                                                   <ArticleTime time={formatYear(item.createAt)}/>
-                                               }
+                                            return (
+                                                <div key={item.id}>
+                                                    {
+                                                        <ArticleTime time={formatYear(item.createAt)}/>
+                                                    }
 
-                                               <div className={'article-columns'} key={item.id}  onClick={() => routerJump(item.id)}>
-                                                   <span>{item.title}</span>
-                                                   <span>{formatMonth(item.createAt)}</span>
-                                               </div>
+                                                    <div className={'article-columns'} key={item.id}
+                                                         onClick={() => routerJump(item.id)}>
+                                                        <span>{item.title}</span>
+                                                        <span>{formatMonth(item.createAt)}</span>
+                                                    </div>
 
-                                           </div>
+                                                </div>
 
-                                        )
-                                    })
-                                }
-                                <Pagination
-                                    onChange={pageChange}
-                                    current={pageNum}
-                                    pageSize={10}
+                                            )
+                                        })
+                                    }
+                                    <Pagination
+                                        onChange={pageChange}
+                                        current={pageNum}
+                                        pageSize={10}
 
-                                    total={articleTotal} />
+                                        total={articleTotal}/>
 
-                            </div>
-                            :
-                            <Empty
-                                style={{ flex: 3, height: '100vh', lineHeight: '100vh', color: '#888' }}
-                                description="抱歉 这里现在什么内容都没有的喵～"/>
-                    }
+                                </div>
+                                :
+                                <Empty
+                                    style={{flex: 3, height: '100vh', lineHeight: '100vh', color: '#888'}}
+                                    description="抱歉 这里现在什么内容都没有的喵～"/>
+                        }
 
-                </Card>
-            </ArticleArchivesWrapper>
+                    </Card>
+                </ArticleArchivesWrapper>
 
-        </>
-    );
-})
+            </>
+        );
+    })
 
 let timeTemp = ''
 
-const ArticleTime:React.FC<{time:string}> = ({time}) => {
+const ArticleTime: React.FC<{ time: string }> = ({time}) => {
 
     const [isChange, setIsChange] = useState(false);
-    const isYear = ()=>{
-        if (time === timeTemp){
+    const isYear = () => {
+        if (time === timeTemp) {
             setIsChange(false)
-        }else {
+        } else {
             timeTemp = time
             setIsChange(true)
         }
@@ -104,9 +104,9 @@ const ArticleTime:React.FC<{time:string}> = ({time}) => {
 
     return (
         <>
-                 {
-                     isChange ? <span style={{fontSize:'20px',}}>{time}</span> : undefined
-                 }
+            {
+                isChange ? <span style={{fontSize: '20px',}}>{time}</span> : undefined
+            }
         </>
     );
 }

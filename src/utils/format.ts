@@ -9,7 +9,7 @@ export const formatYear= (time: string) => {
 }
 
 export const formatMonth = (time: string) => {
-  return moment(time).format("HH-mm")
+  return moment(time).format("MM-DD")
 }
 
 // 从当前时间开始计算 天数
