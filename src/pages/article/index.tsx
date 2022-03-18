@@ -9,6 +9,7 @@ import {Empty, Pagination} from "antd";
 import {useRouter} from "next/router";
 import {ArticleCard} from "@/components/ArticleCard";
 import {IArticle, IArticleList} from "@/common/interface/article";
+import {ArticleListLeft} from "@/components/ArticleListLeft";
 
  const Article: NextPage = memo(( {profile,articleList}: InferGetServerSidePropsType<typeof getServerSideProps>)=> {
      const router = useRouter()
@@ -18,7 +19,7 @@ import {IArticle, IArticleList} from "@/common/interface/article";
 
      const [pageNum, setPageNum] = useState(1)
      const [articleTotal, setArticleTotal] = useState(articleList.total)
-     const [article, setArticle] = useState(articleList.article)
+     const [article, setArticle] = useState<IArticleList[]>(articleList.article)
 
      // 重置文章数据
      const resetArticleList = useCallback(async (page: number) => {
@@ -44,6 +45,10 @@ import {IArticle, IArticleList} from "@/common/interface/article";
                             twitter={profile.twitterUrl}
                             email={profile.emailUrl}
                             avatar={profile.avatar}
+                        />
+
+                        <ArticleListLeft
+                            articleList={articleList}
                         />
                     </div>
                 </div>

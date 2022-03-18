@@ -4,6 +4,11 @@ export const formatTime = (time: string) => {
   return moment(time).format("YYYY-MM-DD HH:mm:ss")
 }
 
+export const formatYearMonth = (time: string) => {
+  return moment(time).format("YYYY-MM-DD")
+}
+
+
 export const formatYear= (time: string) => {
   return moment(time).format("YYYY")
 }
