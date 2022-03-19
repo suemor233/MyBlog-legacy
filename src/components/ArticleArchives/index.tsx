@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import {formatMonth, formatTime, formatYear} from "@/utils/format";
 import {fetchArticleList} from "@/service/modules/article";
 import Article from "@/pages/article";
+import {CustomAxiosResponse} from "@/common/interface/axios";
 
 
 const ArticleArchives: React.FC<IArticle> = memo(
@@ -24,7 +25,7 @@ const ArticleArchives: React.FC<IArticle> = memo(
         const [article, setArticle] = useState(articleList.article)
         // 重置文章数据
         const resetArticleList = useCallback(async (page: number,) => {
-            const articleData: any = await fetchArticleList({pageNum: page, pageSize: 10})
+            const articleData = await fetchArticleList({pageNum: page, pageSize: 10}) as CustomAxiosResponse
             setArticle(articleData.data.article)
             setArticleTotal(articleData.data.total)
         }, [])
