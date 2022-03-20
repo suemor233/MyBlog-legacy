@@ -2,11 +2,9 @@ import React, {memo, useEffect, useState} from 'react';
 import {GetServerSideProps, InferGetServerSidePropsType, NextPage} from "next";
 import {fetchUserProfile} from "@/service/modules/user";
 import {CustomAxiosResponse} from "@/common/interface/axios";
-import {fetchArticleList} from "@/service/modules/article";
 import {useRouter} from "next/router";
 import {Empty} from "antd";
-import store from "@/store";
-import {hideLoadingAction, showLoadingAction} from "@/store/modules/home/actionCreators";
+
 
  const About: NextPage= memo(({profile}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
      const router = useRouter()
