@@ -24,7 +24,6 @@ import {Empty} from "antd";
     );
 })
 
-
 export const getServerSideProps: GetServerSideProps = async () => {
     const profile = await fetchUserProfile({username: "suemor"}) as CustomAxiosResponse
     return {
