@@ -12,7 +12,6 @@ import {Empty} from "antd";
          if (profile.about){
              router.push(`/article/detail/${profile.about}`)
          }
-
      }, [])
 
      return (
