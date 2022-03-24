@@ -2,7 +2,6 @@ import React, {memo, ReactElement} from 'react';
 import {IArticleList} from "@/common/interface/article";
 import {FormOutlined, TableOutlined, TagOutlined,FileTextOutlined} from "@ant-design/icons";
 import {Card, Image, Tag} from "antd";
-import styled from "styled-components"
 import { ArticleCardWrapper } from "./style"
 import {formatCategory, formatTime} from "@/utils/format";
 import {COLORS} from "@/common/colors";
