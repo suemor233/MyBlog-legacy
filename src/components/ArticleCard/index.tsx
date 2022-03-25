@@ -50,8 +50,6 @@ export const ArticleCard: React.FC<IArticleList> = memo(
                             <span></span>
                         </div>
                     </Card>
-
-
                 </ArticleCardWrapper>
 
             </>
