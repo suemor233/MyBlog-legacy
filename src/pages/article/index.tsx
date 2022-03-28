@@ -16,7 +16,6 @@ import {ArticleListLeft} from "@/components/ArticleListLeft";
      const routerJump = (id: string) => {
          router.push(`/article/detail/${id}`)
      }
-
      const [pageNum, setPageNum] = useState(1)
      const [articleTotal, setArticleTotal] = useState(articleList.total)
      const [article, setArticle] = useState<IArticleList[]>(articleList.article)
