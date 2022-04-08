@@ -1,6 +1,6 @@
 const routes = [
   {
-    name: 'Suemor Blog',
+    name: 'suemor blog',
     path: '/article',
   },
   {
